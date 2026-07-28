@@ -94,8 +94,9 @@ export function Footer() {
         <div className="mt-12 flex flex-col gap-3 border-t border-white/15 pt-6 text-[0.82rem] text-white/50 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {BUSINESS.legalName} · Denver, PA ·{" "}
-            <Link href="/privacy" className="hover:text-white">Privacy</Link> ·{" "}
-            <Link href="/terms" className="hover:text-white">Terms</Link>
+            <Link href="/privacy" className="hover:text-white">Privacy Policy</Link> ·{" "}
+            <Link href="/terms" className="hover:text-white">Terms of Use</Link> ·{" "}
+            <Link href="/site-map" className="hover:text-white">Site Map</Link>
           </p>
           <p>
             Website by{" "}
