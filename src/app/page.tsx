@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Pic } from "@/components/Pic";
 import { FaqList } from "@/components/FaqList";
 import { LeadForm } from "@/components/LeadForm";
@@ -98,33 +99,57 @@ const PROMISES = [
   },
 ];
 
-function SectionHead({ eyebrow, title }: { eyebrow: string; title: string }) {
+function SectionHead({ eyebrow, title, light = false }: { eyebrow: string; title: string; light?: boolean }) {
   return (
-    <div className="mb-10 text-center">
-      <p className="eyebrow">{eyebrow}</p>
-      <h2 className="h-section mx-auto mt-2 max-w-3xl">{title}</h2>
-    </div>
+    <Reveal>
+      <div className="mb-10 text-center">
+        <p className={`eyebrow ${light ? "text-vial" : ""}`}>{eyebrow}</p>
+        <h2 className={`h-section mx-auto mt-2 max-w-3xl ${light ? "text-white" : ""}`}>{title}</h2>
+      </div>
+    </Reveal>
+  );
+}
+
+function ServiceCard({ slug, k, label, i }: { slug: string; k: string; label: string; i: number }) {
+  return (
+    <Reveal delay={i * 70} dir="zoom">
+      <Link href={`/services/${slug}`} className="lift group relative block overflow-hidden rounded-xl shadow-md">
+        <div className="aspect-[4/3]">
+          <Pic
+            k={k}
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.07]"
+          />
+        </div>
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-night/85 to-transparent pt-12">
+          <p className="rounded-tr-lg bg-door/95 px-4 py-2.5 font-display text-[0.95rem] font-bold uppercase tracking-wide text-white sm:inline-block">
+            {label}
+          </p>
+        </div>
+      </Link>
+    </Reveal>
   );
 }
 
 export default function Home() {
   return (
     <>
-      {/* HERO: photo mosaic with centered panel */}
+      {/* HERO: photo mosaic with slow drift + centered panel */}
       <section className="relative overflow-hidden bg-night">
-        <div className="grid h-[540px] grid-cols-2 gap-1.5 opacity-[0.88] sm:h-[560px] sm:grid-cols-3">
+        <div className="grid h-[560px] grid-cols-2 gap-1.5 sm:h-[600px] sm:grid-cols-3">
           {MOSAIC.map((k, i) => (
             <div key={k} className={`relative overflow-hidden ${i > 3 ? "hidden sm:block" : ""}`}>
               <Pic
                 k={k}
                 sizes="(min-width: 640px) 33vw, 50vw"
-                className="h-full w-full object-cover"
+                className={`kb ${i % 3 === 1 ? "kb-2" : ""} ${i % 3 === 2 ? "kb-3" : ""} h-full w-full object-cover`}
               />
             </div>
           ))}
         </div>
+        <div className="absolute inset-0 bg-night/25" />
         <div className="absolute inset-0 flex items-center justify-center px-4">
-          <div className="rise max-w-xl rounded-xl bg-paper/97 p-8 text-center shadow-2xl sm:p-10">
+          <div className="rise max-w-xl rounded-2xl bg-paper/97 p-8 text-center shadow-2xl sm:p-10">
             <p className="eyebrow">SERVING LANCASTER &amp; CHESTER COUNTY</p>
             <h1 className="mt-3 text-3xl uppercase tracking-wide text-door sm:text-4xl">
               One Contractor.
@@ -160,39 +185,50 @@ export default function Home() {
       </div>
 
       {/* THREE FEATURES */}
-      <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-        <div className="grid gap-8 sm:grid-cols-3">
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <div className="grid gap-10 sm:grid-cols-3">
           {[
             {
               t: "One Crew, Every Trade",
               d: "Framing, drywall, tile, doors, trim and exterior work by the same in-house team.",
               icon: (
-                <path d="M14 30 30 14m-9-3 8-1 6-6-2 6 6-2-6 6-1 8m-16 4-6 6m10-2-8 8m0-12-6 6" strokeLinecap="round" />
+                <>
+                  <path d="M13 35 35 13" strokeLinecap="round" />
+                  <path d="M27 9l12 12M31 5l12 12M9 27l12 12M5 31l12 12" strokeLinecap="round" />
+                </>
               ),
             },
             {
               t: "Licensed & Insured",
               d: `Registered PA contractor ${BUSINESS.licenseDisplay}, verifiable at the Attorney General's registry.`,
               icon: (
-                <path d="M24 6 10 12v10c0 9 6 15 14 20 8-5 14-11 14-20V12L24 6Zm-6 18 4.5 4.5L31 20" strokeLinecap="round" strokeLinejoin="round" />
+                <path
+                  d="M24 5 9 11v11c0 10 6.5 16.5 15 21 8.5-4.5 15-11 15-21V11L24 5Zm-7 19 5 5 9-9"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               ),
             },
             {
               t: "Real Photos, Real Projects",
               d: "43 documented jobs on this site, every photo from our own crew on our own sites.",
               icon: (
-                <path d="M8 16h8l3-4h10l3 4h8v22H8V16Zm16 17a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" strokeLinecap="round" strokeLinejoin="round" />
+                <>
+                  <rect x="7" y="14" width="34" height="26" rx="3" />
+                  <path d="M17 14l3-5h8l3 5" strokeLinecap="round" strokeLinejoin="round" />
+                  <circle cx="24" cy="26" r="7" />
+                </>
               ),
             },
           ].map((f, i) => (
-            <Reveal key={f.t} delay={i * 80}>
+            <Reveal key={f.t} delay={i * 110} dir="zoom">
               <div className="flex flex-col items-center text-center">
-                <span className="flex h-20 w-20 items-center justify-center rounded-full bg-door text-white">
-                  <svg viewBox="0 0 48 48" className="h-10 w-10" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true">
+                <span className="flex h-24 w-24 items-center justify-center rounded-full border-2 border-line bg-paper shadow-md">
+                  <svg viewBox="0 0 48 48" className="h-11 w-11 text-door" fill="none" stroke="currentColor" strokeWidth="2.6" aria-hidden="true">
                     {f.icon}
                   </svg>
                 </span>
-                <h3 className="mt-4 font-display text-[1.05rem] font-bold uppercase tracking-wide text-door">
+                <h3 className="mt-5 font-display text-[1.05rem] font-bold uppercase tracking-wide text-door">
                   {f.t}
                 </h3>
                 <p className="mt-2 max-w-xs text-[0.95rem] text-ink-soft">{f.d}</p>
@@ -202,36 +238,92 @@ export default function Home() {
         </div>
       </section>
 
-      {/* NAVY TRUST CARD */}
-      <section className="mx-auto max-w-6xl px-4 pb-16 sm:px-6">
-        <Reveal>
-          <div className="rounded-2xl bg-door p-8 text-white shadow-xl sm:p-12">
-            <p className="eyebrow text-vial">EST. 2020 · DENVER, PA</p>
-            <h2 className="mt-2 max-w-2xl text-2xl font-extrabold uppercase tracking-wide sm:text-3xl">
-              Lancaster County&apos;s one-call remodeling company
-            </h2>
-            <p className="mt-4 max-w-2xl text-white/85">
-              DAVMEL Remodeling is built on a simple bet: one licensed crew that covers
-              the whole job beats a parade of subcontractors every time. Six plus years
-              in the Pennsylvania trades, a few hundred finished projects, and a
-              schedule that holds because no outside company can blow it up. We show up
-              when we said, protect your house like we live there, and put every number
-              in writing.
-            </p>
-            <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-              <Link href="/about" className="btn">
-                Get to Know Us
-              </Link>
-              <Link href="/projects" className="btn btn-ghost-light">
-                See Our Work
-              </Link>
+      {/* TRUST CARD floating over evening-home photo */}
+      <section className="relative overflow-hidden">
+        <Image
+          src="/images/stock-home-evening.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-night/45" />
+        <div className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+          <Reveal dir="left">
+            <div className="max-w-xl rounded-2xl bg-door/95 p-8 text-white shadow-2xl backdrop-blur-[2px] sm:p-10">
+              <p className="eyebrow text-vial">EST. 2020 · DENVER, PA</p>
+              <h2 className="mt-2 text-2xl font-extrabold uppercase tracking-wide sm:text-3xl">
+                Lancaster County&apos;s one-call remodeling company
+              </h2>
+              <p className="mt-4 text-white/85">
+                One licensed crew that covers the whole job beats a parade of
+                subcontractors every time. Six plus years in the Pennsylvania trades, a
+                few hundred finished projects, and a schedule that holds because no
+                outside company can blow it up. Every number goes in writing.
+              </p>
+              <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                <Link href="/about" className="btn">
+                  Get in Touch With Us
+                </Link>
+                <Link href="/projects" className="btn btn-ghost-light">
+                  See Our Work
+                </Link>
+              </div>
             </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* FROM PHOTOS TO FINISHED ROOMS */}
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+        <div className="grid items-center gap-12 lg:grid-cols-2">
+          <div className="space-y-5">
+            {[
+              { k: "bathroom-demolition-before-pa", label: "DETAILED SCOPE FOR YOUR VISION" },
+              { k: "shower-pan-liner-install-pa", label: "SEAMLESS PROCESS, REAL CRAFT" },
+              { k: "walk-in-shower-glass-slider-marble-pa", label: "YOUR ALL-IN-ONE REMODELING TEAM" },
+            ].map((c, i) => (
+              <Reveal key={c.k} dir="left" delay={i * 120}>
+                <div className={`lift relative overflow-hidden rounded-xl shadow-lg ${i === 1 ? "sm:ml-14" : ""}`}>
+                  <div className="h-[150px] sm:h-[170px]">
+                    <Pic k={c.k} sizes="(min-width: 1024px) 40vw, 100vw" className="h-full w-full object-cover" />
+                  </div>
+                  <div className="absolute inset-0 bg-door/55" />
+                  <p className="absolute inset-x-0 bottom-4 px-5 font-display text-[0.95rem] font-bold uppercase tracking-wide text-white">
+                    {c.label}
+                  </p>
+                </div>
+              </Reveal>
+            ))}
           </div>
-        </Reveal>
+          <Reveal dir="right">
+            <p className="eyebrow">CRAFTING SUPERIOR SPACES, ENSURING SATISFACTION</p>
+            <h2 className="mt-2 text-2xl font-extrabold uppercase tracking-wide text-door sm:text-3xl">
+              From vision to reality
+            </h2>
+            <p className="mt-4 text-ink-soft">
+              At DAVMEL Remodeling we bring your vision to life with one in-house crew
+              from the first photo you send to the final coat of paint. Whether it is a
+              single tired room or a whole first floor, one team handles demolition,
+              framing, drywall, tile, doors, trim and finishes, so the schedule holds
+              and the details match.
+            </p>
+            <p className="mt-4 text-ink-soft">
+              We are committed to excellence in every detail: written scopes, honest
+              prices published right on this site, and craftsmanship that stands up to
+              Pennsylvania winters and busy family life.
+            </p>
+            <div className="mt-6">
+              <a href="#estimate" className="btn">
+                Get Started
+              </a>
+            </div>
+          </Reveal>
+        </div>
       </section>
 
       {/* SERVICES */}
-      <section className="bg-paper py-16">
+      <section className="bg-paper py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <SectionHead
             eyebrow="YOUR MOST RELIABLE REMODELING SERVICES"
@@ -241,44 +333,14 @@ export default function Home() {
           <p className="spec-plate mb-4 text-center text-door">INDOOR SERVICES</p>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {INDOOR.map((s, i) => (
-              <Reveal key={s.slug} delay={i * 60}>
-                <Link href={`/services/${s.slug}`} className="group relative block overflow-hidden rounded-xl shadow-md">
-                  <div className="aspect-[4/3]">
-                    <Pic
-                      k={s.k}
-                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
-                    />
-                  </div>
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-night/85 to-transparent pt-12">
-                    <p className="rounded-tr-lg bg-door/95 px-4 py-2.5 font-display text-[0.95rem] font-bold uppercase tracking-wide text-white sm:inline-block">
-                      {s.label}
-                    </p>
-                  </div>
-                </Link>
-              </Reveal>
+              <ServiceCard key={s.slug} {...s} i={i} />
             ))}
           </div>
 
           <p className="spec-plate mb-4 mt-12 text-center text-door">OUTDOOR SERVICES</p>
           <div className="grid gap-5 sm:grid-cols-3">
             {OUTDOOR.map((s, i) => (
-              <Reveal key={s.slug} delay={i * 60}>
-                <Link href={`/services/${s.slug}`} className="group relative block overflow-hidden rounded-xl shadow-md">
-                  <div className="aspect-[4/3]">
-                    <Pic
-                      k={s.k}
-                      sizes="(min-width: 640px) 33vw, 100vw"
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
-                    />
-                  </div>
-                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-night/85 to-transparent pt-12">
-                    <p className="rounded-tr-lg bg-door/95 px-4 py-2.5 font-display text-[0.95rem] font-bold uppercase tracking-wide text-white sm:inline-block">
-                      {s.label}
-                    </p>
-                  </div>
-                </Link>
-              </Reveal>
+              <ServiceCard key={s.slug} {...s} i={i} />
             ))}
           </div>
 
@@ -292,9 +354,9 @@ export default function Home() {
 
       {/* BATHROOM BANNER */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <Reveal>
-          <div className="grid items-stretch overflow-hidden rounded-2xl border border-line bg-paper shadow-lg lg:grid-cols-2">
-            <div className="flex flex-col justify-center p-8 sm:p-12">
+        <div className="grid items-stretch overflow-hidden rounded-2xl border border-line bg-paper shadow-xl lg:grid-cols-2">
+          <Reveal dir="left" className="order-2 lg:order-1">
+            <div className="flex h-full flex-col justify-center p-8 sm:p-12">
               <p className="eyebrow">FLAGSHIP TRADE</p>
               <h2 className="mt-2 text-2xl font-extrabold uppercase tracking-wide text-door sm:text-3xl">
                 Luxurious bathroom transformations
@@ -311,52 +373,61 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-            <div className="min-h-[280px]">
+          </Reveal>
+          <Reveal dir="right" className="order-1 min-h-[280px] lg:order-2">
+            <div className="h-full min-h-[280px] overflow-hidden">
               <Pic
-                k="walk-in-shower-glass-slider-marble-pa"
+                k="bathroom-jetted-tub-marble-surround-pa"
                 sizes="(min-width: 1024px) 50vw, 100vw"
                 className="h-full w-full object-cover"
               />
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </section>
 
-      {/* DECK BANNER (dark) */}
-      <section className="relative overflow-hidden bg-night">
-        <div className="absolute inset-0 opacity-30">
+      {/* DECK BANNER: white card floating over full-bleed photo */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0">
           <Pic
             k="composite-deck-cable-railing-lancaster-pa"
             sizes="100vw"
             className="h-full w-full object-cover"
           />
         </div>
-        <div className="relative mx-auto max-w-6xl px-4 py-20 text-center sm:px-6">
-          <p className="eyebrow text-vial">BUILT FOR PENNSYLVANIA WEATHER</p>
-          <h2 className="mx-auto mt-2 max-w-2xl text-2xl font-extrabold uppercase tracking-wide text-white sm:text-3xl">
-            Durable decks, windows and doors
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-white/85">
-            Composite decks on engineered frames, replacement windows with aluminum
-            capping, entry doors flashed to survive thirty winters. Same crew, same
-            license, same phone number as our interior work.
-          </p>
-          <div className="mt-6">
-            <Link href="/services/exterior-remodeling" className="btn">
-              Explore Exterior Work
-            </Link>
-          </div>
+        <div className="absolute inset-0 bg-night/40" />
+        <div className="relative mx-auto flex max-w-6xl justify-end px-4 py-20 sm:px-6 sm:py-28">
+          <Reveal dir="right">
+            <div className="max-w-xl rounded-2xl bg-paper/97 p-8 shadow-2xl sm:p-10">
+              <p className="eyebrow">BUILT FOR PENNSYLVANIA WEATHER</p>
+              <h2 className="mt-2 text-2xl font-extrabold uppercase tracking-wide text-door sm:text-3xl">
+                Durable decks, windows and doors
+              </h2>
+              <p className="mt-4 text-ink-soft">
+                Composite decks on engineered frames, replacement windows with aluminum
+                capping, entry doors flashed to survive thirty winters. This deck went
+                in during a snowstorm so the family could grill by the first warm
+                Saturday. Same crew, same license, same phone number as our interior
+                work.
+              </p>
+              <div className="mt-6">
+                <Link href="/services/exterior-remodeling" className="btn">
+                  Explore Exterior Work
+                </Link>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
       {/* SERVICE AREA */}
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
         <SectionHead
           eyebrow="WHERE WE WORK"
           title="Your best remodeling services in Lancaster & Chester County"
         />
         <div className="grid items-center gap-10 lg:grid-cols-2">
-          <Reveal>
+          <Reveal dir="left">
             <p className="max-w-xl text-ink-soft">
               Home base is Denver, PA in northern Lancaster County. From there we cover
               about 75 miles in every direction: city rowhomes, borough Victorians,
@@ -384,7 +455,7 @@ export default function Home() {
               </Link>
             </div>
           </Reveal>
-          <Reveal delay={100}>
+          <Reveal dir="right" delay={100}>
             <div className="hidden rounded-2xl bg-night p-6 shadow-xl sm:block">
               <RadiusMap />
             </div>
@@ -393,23 +464,23 @@ export default function Home() {
       </section>
 
       {/* GALLERY */}
-      <section className="bg-paper py-16">
+      <section className="bg-paper py-16 sm:py-20">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <SectionHead eyebrow="RECENT WORK" title="Let's bring your vision to life" />
         </div>
-        <Reveal>
-          <div className="snap-row flex gap-5 overflow-x-auto px-4 pb-4 sm:px-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]">
+        <Reveal dir="zoom">
+          <div className="snap-row flex gap-5 overflow-x-auto px-4 pb-6 sm:px-[max(1.5rem,calc((100vw-72rem)/2+1.5rem))]">
             {GALLERY.map((item) => (
               <Link
                 key={item.slug}
                 href={`/projects/${item.slug}`}
-                className="group block w-[75vw] shrink-0 overflow-hidden rounded-xl shadow-md sm:w-[380px]"
+                className="lift group block w-[75vw] shrink-0 overflow-hidden rounded-xl shadow-md sm:w-[380px]"
               >
                 <div className="h-[240px] sm:h-[260px]">
                   <Pic
                     k={item.k}
                     sizes="(min-width: 640px) 380px, 75vw"
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.05]"
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.07]"
                   />
                 </div>
               </Link>
@@ -417,14 +488,14 @@ export default function Home() {
             <div className="w-2 shrink-0" aria-hidden="true" />
           </div>
         </Reveal>
-        <div className="mt-8 text-center">
+        <div className="mt-6 text-center">
           <Link href="/projects" className="btn">
             Read the Stories Behind These Photos
           </Link>
         </div>
       </section>
 
-      {/* PROMISES (testimonial-style cards) */}
+      {/* PROMISES */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <SectionHead
           eyebrow="NO REVIEWS BOUGHT, NONE INVENTED"
@@ -432,8 +503,8 @@ export default function Home() {
         />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {PROMISES.map((p, i) => (
-            <Reveal key={p.t} delay={i * 70}>
-              <div className="flex h-full flex-col rounded-xl border border-line bg-paper p-6 shadow-sm">
+            <Reveal key={p.t} delay={i * 90} dir="zoom">
+              <div className="lift flex h-full flex-col rounded-xl border border-line bg-paper p-6 shadow-sm">
                 <svg viewBox="0 0 24 24" className="h-6 w-6 text-tape" fill="currentColor" aria-hidden="true">
                   <path d="M12 2 3 6v6c0 5.2 3.8 9 9 12 5.2-3 9-6.8 9-12V6l-9-4Zm-1.2 13.6-3.4-3.4 1.4-1.4 2 2 4.4-4.4 1.4 1.4-5.8 5.8Z" />
                 </svg>
@@ -456,28 +527,42 @@ export default function Home() {
       {/* FAQ */}
       <section className="mx-auto max-w-3xl px-4 pb-16 sm:px-6">
         <SectionHead eyebrow="GOOD QUESTIONS" title="Frequently asked questions" />
-        <FaqList faqs={HOME_FAQS} heading="" />
+        <Reveal>
+          <FaqList faqs={HOME_FAQS} heading="" />
+        </Reveal>
       </section>
 
-      {/* CONTACT / PHOTO ESTIMATE */}
-      <section id="estimate" className="bg-door">
-        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+      {/* CONTACT over family photo */}
+      <section id="estimate" className="relative overflow-hidden">
+        <Image
+          src="/images/stock-family-keys.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-door/70" />
+        <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
           <div className="mb-10 text-center">
-            <p className="eyebrow text-vial">CONTACT US TODAY</p>
-            <h2 className="h-section mt-2 text-white">Send photos, get a preliminary quote</h2>
-            <p className="mx-auto mt-3 max-w-xl text-white/85">
-              Snap 2 to 4 pictures of the project, fill the form in under a minute, and
-              we call back with a real ballpark the same business day. Prefer to talk
-              first?{" "}
-              <a href={telHref()} className="font-display font-bold text-vial underline underline-offset-4">
-                {BUSINESS.phoneDisplay}
-              </a>
-            </p>
+            <Reveal>
+              <p className="eyebrow text-vial">CONTACT US TODAY</p>
+              <h2 className="h-section mt-2 text-white">Send photos, get a preliminary quote</h2>
+              <p className="mx-auto mt-3 max-w-xl text-white/90">
+                Snap 2 to 4 pictures of the project, fill the form in under a minute,
+                and we call back with a real ballpark the same business day. Prefer to
+                talk first?{" "}
+                <a href={telHref()} className="font-display font-bold text-vial underline underline-offset-4">
+                  {BUSINESS.phoneDisplay}
+                </a>
+              </p>
+            </Reveal>
           </div>
-          <div className="mx-auto max-w-2xl">
-            <LeadForm />
-          </div>
-          <p className="spec-plate mt-6 text-center text-white/60">
+          <Reveal dir="zoom">
+            <div className="mx-auto max-w-2xl overflow-hidden rounded-2xl shadow-2xl">
+              <LeadForm />
+            </div>
+          </Reveal>
+          <p className="spec-plate mt-6 text-center text-white/70">
             {BUSINESS.licenseDisplay} · LICENSED &amp; INSURED · SERVING LANCASTER + CHESTER COUNTY
           </p>
         </div>
