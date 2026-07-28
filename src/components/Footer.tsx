@@ -8,7 +8,7 @@ export function Footer() {
   return (
     <footer className="bg-night text-white/80">
       <div className="mx-auto max-w-6xl px-4 py-14 sm:px-6">
-        <div className="grid gap-10 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
+        <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-[1.2fr_0.85fr_0.85fr_0.85fr_1.15fr]">
           <div>
             <span className="flex items-center gap-2.5 text-white">
               <LogoMark className="h-9 w-9 text-white" />
@@ -89,6 +89,24 @@ export function Footer() {
               ))}
             </ul>
           </nav>
+
+          <div>
+            <p className="spec-plate mb-3 text-white/50">FIND US</p>
+            <div className="overflow-hidden rounded-xl border border-white/15">
+              <iframe
+                src="https://www.google.com/maps?q=Denver,+PA+17517&z=9&output=embed"
+                title="DAVMEL Remodeling service area map, Denver PA"
+                width="100%"
+                height="220"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="block w-full"
+              />
+            </div>
+            <p className="mt-3 text-[0.85rem] text-white/60">
+              Based in Denver, PA. Serving about 75 miles around home base.
+            </p>
+          </div>
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-white/15 pt-6 text-[0.82rem] text-white/50 sm:flex-row sm:items-center sm:justify-between">
