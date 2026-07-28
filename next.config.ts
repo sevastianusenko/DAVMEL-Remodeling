@@ -1,17 +1,8 @@
 import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
-  async redirects() {
-    return [
-      // www → apex, permanent. Keeps every page on exactly one canonical host.
-      {
-        source: "/:path*",
-        has: [{ type: "host", value: "www.davmelremodeling.com" }],
-        destination: "https://davmelremodeling.com/:path*",
-        permanent: true,
-      },
-    ];
-  },
-};
+// NOTE: www/apex redirect is handled at the Vercel domain level, not here.
+// An app-level host redirect fought Vercel's primary-domain redirect and
+// caused ERR_TOO_MANY_REDIRECTS. Keep host canonicalization in Vercel only.
+const nextConfig: NextConfig = {};
 
 export default nextConfig;
