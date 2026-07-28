@@ -4,8 +4,8 @@ import Image from "next/image";
 import { Pic } from "@/components/Pic";
 import { photo } from "@/lib/photos";
 import { SectionRule } from "@/components/SectionRule";
-import { CtaBand } from "@/components/CtaBand";
 import { FaqList } from "@/components/FaqList";
+import { LeadForm } from "@/components/LeadForm";
 import { BUSINESS, telHref } from "@/lib/business";
 import { SERVICES } from "@/lib/services";
 import { CITIES } from "@/lib/cities";
@@ -86,9 +86,9 @@ export default function Home() {
               <a href={telHref()} className="btn">
                 Call {BUSINESS.phoneDisplay}
               </a>
-              <Link href="/contact" className="btn btn-ghost">
-                Request a Free Estimate
-              </Link>
+              <a href="#estimate" className="btn btn-ghost">
+                Get a Photo Quote
+              </a>
             </div>
           </div>
         </div>
@@ -314,7 +314,47 @@ export default function Home() {
         <FaqList faqs={HOME_FAQS} />
       </section>
 
-      <CtaBand />
+      {/* PHOTO ESTIMATE */}
+      <section id="estimate" className="bg-door-deep text-white">
+        <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+          <div className="grid items-start gap-10 lg:grid-cols-[1fr_1.3fr]">
+            <div>
+              <h2 className="font-display text-3xl font-extrabold sm:text-4xl">
+                Send photos, get a preliminary quote
+              </h2>
+              <p className="mt-4 max-w-md text-white/85">
+                Take a few pictures of the room, the deck, the wall, whatever needs
+                work. We look at them the same business day and call back with a real
+                ballpark. No visit needed for the first number, no pressure after it.
+              </p>
+              <ul className="mt-6 space-y-2.5 text-[0.95rem] text-white/85">
+                <li className="flex gap-2.5">
+                  <span className="spec-plate mt-0.5 shrink-0 text-vial">01</span>
+                  Snap 2 to 4 photos with your phone
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="spec-plate mt-0.5 shrink-0 text-vial">02</span>
+                  Send the form, takes under a minute
+                </li>
+                <li className="flex gap-2.5">
+                  <span className="spec-plate mt-0.5 shrink-0 text-vial">03</span>
+                  We call back with a preliminary quote
+                </li>
+              </ul>
+              <p className="spec-plate mt-8 text-white/60">
+                {BUSINESS.licenseDisplay} · LICENSED &amp; INSURED · LANCASTER + CHESTER CO
+              </p>
+              <p className="mt-6 text-white/85">
+                Prefer to talk first?{" "}
+                <a href={telHref()} className="font-display font-bold text-vial underline underline-offset-4">
+                  {BUSINESS.phoneDisplay}
+                </a>
+              </p>
+            </div>
+            <LeadForm />
+          </div>
+        </div>
+      </section>
     </>
   );
 }
