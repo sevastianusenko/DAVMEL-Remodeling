@@ -51,17 +51,16 @@ const MOSAIC = [
 ];
 
 const INDOOR = [
-  { slug: "bathroom-remodeling", k: "bathroom-jetted-tub-marble-surround-pa", label: "Bathroom Remodeling" },
-  { slug: "kitchen-remodeling", k: "kitchen-remodel-quartz-farmhouse-sink-pa", label: "Kitchen Remodeling" },
+  { slug: "bathroom-remodeling", k: "kitchen-remodel-quartz-farmhouse-sink-pa", label: "Bathroom & Kitchen Remodeling" },
   { slug: "basement-finishing", k: "basement-remodel-framing-spray-foam-pa", label: "Basement Finishing" },
   { slug: "drywall-installation-repair", k: "drywall-taping-mudding-pa", label: "Drywall & Plaster" },
   { slug: "tile-installation", k: "marble-shower-mosaic-pan-linear-drain-pa", label: "Tile Installation" },
-  { slug: "full-room-renovation", k: "geometric-accent-wall-lvp-flooring-pa", label: "Full Room Renovation" },
 ];
 
 const OUTDOOR = [
   { slug: "deck-building", k: "elevated-composite-deck-brick-ranch-pa", label: "Deck Building" },
-  { slug: "window-door-installation", k: "modern-front-door-sidelites-stone-pa", label: "Windows & Doors" },
+  { slug: "window-door-installation", k: "replacement-windows-aluminum-capping-pa", label: "Window Replacement" },
+  { slug: "window-door-installation", k: "modern-front-door-sidelites-stone-pa", label: "Entry & Storm Doors" },
   { slug: "porch-deck-refinishing", k: "porch-steps-refinishing-before-after-pa", label: "Porch & Deck Refinishing" },
 ];
 
@@ -345,7 +344,7 @@ export default function Home() {
                 <h3 className="h-section mb-7 !text-[1.35rem]">Indoor Services</h3>
                 <div className="grid gap-5 sm:grid-cols-2">
                   {INDOOR.map((s, i) => (
-                    <ServiceCard key={s.slug} {...s} i={i} />
+                    <ServiceCard key={s.label} {...s} i={i} />
                   ))}
                 </div>
               </div>
@@ -356,19 +355,8 @@ export default function Home() {
                 <h3 className="h-section mb-7 !text-[1.35rem]">Outdoor Services</h3>
                 <div className="grid gap-5 sm:grid-cols-2">
                   {OUTDOOR.map((s, i) => (
-                    <ServiceCard key={s.slug} {...s} i={i} />
+                    <ServiceCard key={s.label} {...s} i={i} />
                   ))}
-                  <Reveal delay={210} dir="zoom" className="h-full">
-                    <Link
-                      href="/services/exterior-remodeling"
-                      className="lift group flex h-full min-h-[180px] flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-door/40 bg-paper/60 p-6 text-center transition-colors hover:border-door"
-                    >
-                      <span className="font-display text-[1.4rem] font-extrabold text-door">+</span>
-                      <span className="font-display text-[0.92rem] font-bold uppercase tracking-wide text-door">
-                        All Exterior Work ➤
-                      </span>
-                    </Link>
-                  </Reveal>
                 </div>
               </div>
             </Reveal>
