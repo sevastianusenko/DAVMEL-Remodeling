@@ -20,7 +20,7 @@ export function Header() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-plaster/95 backdrop-blur-sm">
+    <header className="sticky top-0 z-40 border-b border-line bg-paper/95 backdrop-blur-sm">
       <div className="mx-auto flex h-[72px] max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
         <Link href="/" aria-label="DAVMEL Remodeling, home" onClick={() => setOpen(false)}>
           <LogoWordmark />
@@ -64,7 +64,7 @@ export function Header() {
       </div>
 
       {open && (
-        <nav id="mobile-nav" aria-label="Mobile" className="border-t border-line bg-plaster lg:hidden">
+        <nav id="mobile-nav" aria-label="Mobile" className="border-t border-line bg-paper lg:hidden">
           <ul className="mx-auto max-w-6xl px-4 py-3 sm:px-6">
             {NAV.map((item) => (
               <li key={item.href} className="border-b border-line-soft last:border-0">

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, Source_Serif_4, IBM_Plex_Mono } from "next/font/google";
+import { Archivo, Public_Sans, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -13,9 +13,9 @@ const archivo = Archivo({
   display: "swap",
 });
 
-const sourceSerif = Source_Serif_4({
+const publicSans = Public_Sans({
   subsets: ["latin"],
-  variable: "--font-source-serif",
+  variable: "--font-public-sans",
   display: "swap",
 });
 
@@ -89,8 +89,11 @@ const businessSchema = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${archivo.variable} ${sourceSerif.variable} ${plexMono.variable}`}>
+    <html lang="en" className={`${archivo.variable} ${publicSans.variable} ${plexMono.variable}`}>
       <body className="pb-[52px] sm:pb-0">
+        <script
+          dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }}
+        />
         <JsonLd data={businessSchema} />
         <a
           href="#main"

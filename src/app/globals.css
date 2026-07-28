@@ -1,22 +1,22 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-plaster: #f5f4f0;
+  --color-plaster: #f4f6fa;
   --color-paper: #ffffff;
-  --color-ink: #20242a;
-  --color-ink-soft: #4c525b;
-  --color-door: #2c5972;
-  --color-door-deep: #1d3d4f;
-  --color-night: #16232b;
+  --color-ink: #1e2733;
+  --color-ink-soft: #4a5568;
+  --color-door: #1b3764;
+  --color-door-deep: #142a4d;
+  --color-night: #0f2140;
   --color-tape: #2274ce;
-  --color-tape-deep: #1b5fa8;
-  --color-oak: #a9723d;
-  --color-vial: #c9d64f;
-  --color-line: #ddd9ce;
-  --color-line-soft: #e8e5dc;
+  --color-tape-deep: #1a5da8;
+  --color-oak: #2274ce;
+  --color-vial: #9dc9f5;
+  --color-line: #dbe2ec;
+  --color-line-soft: #e9eef5;
 
   --font-display: var(--font-archivo), "Arial Narrow", sans-serif;
-  --font-body: var(--font-source-serif), Georgia, serif;
+  --font-body: var(--font-public-sans), Arial, sans-serif;
   --font-mono: var(--font-plex-mono), "Courier New", monospace;
 }
 
@@ -24,7 +24,7 @@ body {
   background: var(--color-plaster);
   color: var(--color-ink);
   font-family: var(--font-body);
-  font-size: 1.0625rem;
+  font-size: 1rem;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
@@ -35,8 +35,8 @@ h3,
 h4 {
   font-family: var(--font-display);
   font-weight: 800;
-  line-height: 1.08;
-  letter-spacing: -0.01em;
+  line-height: 1.12;
+  letter-spacing: 0.01em;
   text-wrap: balance;
 }
 
@@ -89,19 +89,35 @@ h4 {
   }
 
   .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    font-weight: 600;
+    font-family: var(--font-display);
+    font-size: 0.78rem;
+    font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--color-door);
+    color: var(--color-tape);
   }
 
   .spec-plate {
-    font-family: var(--font-mono);
+    font-family: var(--font-display);
     font-size: 0.72rem;
-    letter-spacing: 0.04em;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--color-ink-soft);
+  }
+
+  /* Centered section heading pattern, reference style. */
+  .h-section {
+    text-align: center;
+    text-transform: uppercase;
+    color: var(--color-door);
+    font-size: 1.7rem;
+    letter-spacing: 0.03em;
+  }
+  @media (min-width: 640px) {
+    .h-section {
+      font-size: 2.1rem;
+    }
   }
 
   .btn {
@@ -113,8 +129,8 @@ h4 {
     font-weight: 700;
     font-size: 0.95rem;
     letter-spacing: 0.02em;
-    padding: 0.8rem 1.5rem;
-    border-radius: 3px;
+    padding: 0.8rem 1.6rem;
+    border-radius: 8px;
     background: var(--color-tape);
     color: #fff;
     transition: background-color 150ms ease;
@@ -203,10 +219,74 @@ h4 {
       width: 100%;
     }
   }
+  /* Hero panel entrance. */
+  .rise {
+    animation: rise 0.75s cubic-bezier(0.19, 1, 0.22, 1) both;
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(26px);
+    }
+  }
+
+  /* Scroll reveal (Reveal component). Hidden only when JS is present. */
+  html.js .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition:
+      opacity 0.65s cubic-bezier(0.19, 1, 0.22, 1),
+      transform 0.65s cubic-bezier(0.19, 1, 0.22, 1);
+  }
+  html.js .reveal.in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Horizontal gallery strip. */
+  .snap-row {
+    scroll-snap-type: x mandatory;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
+  }
+  .snap-row > * {
+    scroll-snap-align: start;
+  }
+
+  /* Base-of-operations pulse on the radius map. */
+  .map-pulse {
+    transform-origin: center;
+    transform-box: fill-box;
+    animation: map-pulse 3.2s ease-out infinite;
+  }
+  @keyframes map-pulse {
+    0% {
+      transform: scale(0.4);
+      opacity: 0.8;
+    }
+    70% {
+      transform: scale(1.6);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1.6);
+      opacity: 0;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .chalk {
       animation: none;
       width: 100%;
+    }
+    .rise,
+    .map-pulse {
+      animation: none;
+    }
+    html.js .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
     }
   }
 }
