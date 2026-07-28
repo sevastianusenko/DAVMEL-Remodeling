@@ -112,20 +112,21 @@ function SectionHead({ eyebrow, title, light = false }: { eyebrow: string; title
 
 function ServiceCard({ slug, k, label, i }: { slug: string; k: string; label: string; i: number }) {
   return (
-    <Reveal delay={i * 70} dir="zoom">
-      <Link href={`/services/${slug}`} className="lift group relative block overflow-hidden rounded-xl shadow-md">
-        <div className="aspect-[4/3]">
+    <Reveal delay={i * 70} dir="zoom" className="h-full">
+      <Link href={`/services/${slug}`} className="lift group flex h-full flex-col overflow-hidden rounded-lg shadow-md">
+        <div className="aspect-[16/11] overflow-hidden">
           <Pic
             k={k}
-            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            sizes="(min-width: 1024px) 25vw, (min-width: 640px) 45vw, 90vw"
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.07]"
           />
         </div>
-        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-night/85 to-transparent pt-12">
-          <p className="rounded-tr-lg bg-door/95 px-4 py-2.5 font-display text-[0.95rem] font-bold uppercase tracking-wide text-white sm:inline-block">
-            {label}
-          </p>
-        </div>
+        <p className="flex flex-1 items-center justify-center gap-2 bg-door px-4 py-4 text-center font-display text-[0.92rem] font-bold uppercase tracking-wide text-white transition-colors group-hover:bg-door-deep">
+          {label}
+          <span aria-hidden="true" className="text-vial transition-transform group-hover:translate-x-1">
+            ➤
+          </span>
+        </p>
       </Link>
     </Reveal>
   );
@@ -322,32 +323,61 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SERVICES */}
-      <section className="bg-paper py-16 sm:py-20">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+      {/* SERVICES: two glass panels over a faint work-site photo */}
+      <section className="relative overflow-hidden py-16 sm:py-20">
+        <Image
+          src="/images/stock-renovation-bg.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-30"
+        />
+        <div className="absolute inset-0 bg-plaster/70" />
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6">
           <SectionHead
             eyebrow="YOUR MOST RELIABLE REMODELING SERVICES"
             title="Comprehensive remodeling services"
           />
 
-          <p className="spec-plate mb-4 text-center text-door">INDOOR SERVICES</p>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {INDOOR.map((s, i) => (
-              <ServiceCard key={s.slug} {...s} i={i} />
-            ))}
-          </div>
+          <div className="grid items-start gap-8 lg:grid-cols-2">
+            <Reveal dir="left">
+              <div className="rounded-2xl bg-paper/70 p-6 shadow-xl backdrop-blur-md sm:p-8">
+                <h3 className="h-section mb-7 !text-[1.35rem]">Indoor Services</h3>
+                <div className="grid gap-5 sm:grid-cols-2">
+                  {INDOOR.map((s, i) => (
+                    <ServiceCard key={s.slug} {...s} i={i} />
+                  ))}
+                </div>
+              </div>
+            </Reveal>
 
-          <p className="spec-plate mb-4 mt-12 text-center text-door">OUTDOOR SERVICES</p>
-          <div className="grid gap-5 sm:grid-cols-3">
-            {OUTDOOR.map((s, i) => (
-              <ServiceCard key={s.slug} {...s} i={i} />
-            ))}
+            <Reveal dir="right">
+              <div className="rounded-2xl bg-paper/70 p-6 shadow-xl backdrop-blur-md sm:p-8">
+                <h3 className="h-section mb-7 !text-[1.35rem]">Outdoor Services</h3>
+                <div className="grid gap-5 sm:grid-cols-2">
+                  {OUTDOOR.map((s, i) => (
+                    <ServiceCard key={s.slug} {...s} i={i} />
+                  ))}
+                  <Reveal delay={210} dir="zoom" className="h-full">
+                    <Link
+                      href="/services/exterior-remodeling"
+                      className="lift group flex h-full min-h-[180px] flex-col items-center justify-center gap-3 rounded-lg border-2 border-dashed border-door/40 bg-paper/60 p-6 text-center transition-colors hover:border-door"
+                    >
+                      <span className="font-display text-[1.4rem] font-extrabold text-door">+</span>
+                      <span className="font-display text-[0.92rem] font-bold uppercase tracking-wide text-door">
+                        All Exterior Work ➤
+                      </span>
+                    </Link>
+                  </Reveal>
+                </div>
+              </div>
+            </Reveal>
           </div>
 
           <div className="mt-10 text-center">
-            <Link href="/services" className="btn">
-              All 13 Services
-            </Link>
+            <a href="#estimate" className="btn">
+              Reach Out
+            </a>
           </div>
         </div>
       </section>
@@ -535,7 +565,7 @@ export default function Home() {
       {/* CONTACT over family photo */}
       <section id="estimate" className="relative overflow-hidden">
         <Image
-          src="/images/stock-family-keys.jpg"
+          src="/images/stock-house-blossom.jpg"
           alt=""
           fill
           sizes="100vw"
