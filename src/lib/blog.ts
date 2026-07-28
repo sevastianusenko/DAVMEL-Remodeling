@@ -422,6 +422,16 @@ export const POSTS: Post[] = [
   },
 ];
 
+import { POSTS_B1 } from "./blog-batch-1";
+import { POSTS_B2 } from "./blog-batch-2";
+import { POSTS_B3 } from "./blog-batch-3";
+import { POSTS_B4 } from "./blog-batch-4";
+import { POSTS_B5 } from "./blog-batch-5";
+import { POSTS_B6 } from "./blog-batch-6";
+
+POSTS.push(...POSTS_B1, ...POSTS_B2, ...POSTS_B3, ...POSTS_B4, ...POSTS_B5, ...POSTS_B6);
+POSTS.sort((a, b) => b.date.localeCompare(a.date));
+
 export function getPost(slug: string): Post | undefined {
   return POSTS.find((p) => p.slug === slug);
 }
