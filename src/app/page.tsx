@@ -372,33 +372,70 @@ export default function Home() {
 
       {/* BATHROOM BANNER */}
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <div className="grid items-stretch overflow-hidden rounded-2xl border border-line bg-paper shadow-xl lg:grid-cols-2">
-          <Reveal dir="left" className="order-2 lg:order-1">
-            <div className="flex h-full flex-col justify-center p-8 sm:p-12">
-              <p className="eyebrow">FLAGSHIP TRADE</p>
-              <h2 className="mt-2 text-2xl font-extrabold uppercase tracking-wide text-door sm:text-3xl">
-                Luxurious bathroom transformations
-              </h2>
-              <p className="mt-4 max-w-md text-ink-soft">
-                Waterproofed as a system, tiled like we sign it. From tub to shower
-                conversions to full primary baths with marble, glass and heated floors.
-                Most projects run two to three weeks, with honest prices published
-                right on the site.
-              </p>
-              <div className="mt-6">
-                <Link href="/services/bathroom-remodeling" className="btn">
-                  Get Service Today
-                </Link>
-              </div>
+        <div className="grid items-center gap-10 lg:grid-cols-2">
+          <Reveal dir="left">
+            <p className="eyebrow">FLAGSHIP TRADE</p>
+            <h2 className="mt-2 text-2xl font-extrabold uppercase tracking-wide text-door sm:text-3xl">
+              Luxurious bathroom transformations
+            </h2>
+            <p className="mt-4 max-w-md text-ink-soft">
+              Waterproofed as a system, tiled like we sign it. From tub to shower
+              conversions to full primary baths with marble, glass and heated floors.
+              Honest prices live right on the site, not behind a sales visit.
+            </p>
+            <ul className="mt-6 space-y-3">
+              {[
+                ["Tub to shower conversion", "$7,000 to $14,000 · about a week"],
+                ["Hall bathroom, full remodel", "$12,000 to $22,000 · 2 to 3 weeks"],
+                ["Primary bath with tile shower", "$20,000 to $40,000 · 3 to 4 weeks"],
+              ].map(([t, d]) => (
+                <li key={t} className="flex items-start gap-3">
+                  <svg viewBox="0 0 16 16" className="mt-1 h-4 w-4 shrink-0 text-tape" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true">
+                    <path d="M3 8.5 6.5 12 13 4.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <span>
+                    <span className="font-display font-bold text-ink">{t}</span>
+                    <span className="block text-[0.9rem] text-ink-soft">{d}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+              <Link href="/services/bathroom-remodeling" className="btn">
+                Get Service Today
+              </Link>
+              <Link href="/blog/bathroom-remodel-cost-lancaster-pa" className="btn btn-ghost">
+                See Full Pricing
+              </Link>
             </div>
           </Reveal>
-          <Reveal dir="right" className="order-1 min-h-[280px] lg:order-2">
-            <div className="h-full min-h-[280px] overflow-hidden">
-              <Pic
-                k="bathroom-jetted-tub-marble-surround-pa"
-                sizes="(min-width: 1024px) 50vw, 100vw"
-                className="h-full w-full object-cover"
-              />
+
+          <Reveal dir="right">
+            <div className="relative pb-14 pl-0 sm:pb-16">
+              <div className="lift overflow-hidden rounded-2xl shadow-xl">
+                <div className="h-[320px] sm:h-[400px]">
+                  <Pic
+                    k="bathroom-remodel-marble-tile-lancaster-pa"
+                    sizes="(min-width: 1024px) 50vw, 100vw"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <p className="bg-door px-5 py-2.5 text-center font-display text-[0.85rem] font-bold uppercase tracking-wide text-white">
+                  After · Marble bath rebuild, Lancaster
+                </p>
+              </div>
+              <div className="absolute bottom-0 left-4 w-[42%] max-w-[240px] overflow-hidden rounded-xl border-4 border-paper shadow-2xl sm:left-6">
+                <div className="h-[110px] sm:h-[130px]">
+                  <Pic
+                    k="tub-surround-demo-before-pa"
+                    sizes="240px"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <p className="bg-night px-3 py-1.5 text-center font-display text-[0.7rem] font-bold uppercase tracking-widest text-white">
+                  Before
+                </p>
+              </div>
             </div>
           </Reveal>
         </div>
