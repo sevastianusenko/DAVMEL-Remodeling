@@ -5,6 +5,7 @@ import { Pic } from "@/components/Pic";
 import { FaqList } from "@/components/FaqList";
 import { LeadForm } from "@/components/LeadForm";
 import { Reveal } from "@/components/Reveal";
+import { SectionHead } from "@/components/SectionHead";
 import { BUSINESS, telHref } from "@/lib/business";
 import { CITIES } from "@/lib/cities";
 
@@ -96,17 +97,6 @@ const PROMISES = [
     tag: "LICENSED & INSURED",
   },
 ];
-
-function SectionHead({ eyebrow, title, light = false }: { eyebrow: string; title: string; light?: boolean }) {
-  return (
-    <Reveal>
-      <div className="mb-10 text-center">
-        <p className={`eyebrow ${light ? "text-vial" : ""}`}>{eyebrow}</p>
-        <h2 className={`h-section mx-auto mt-2 max-w-3xl ${light ? "text-white" : ""}`}>{title}</h2>
-      </div>
-    </Reveal>
-  );
-}
 
 function ServiceCard({ slug, k, label, i }: { slug: string; k: string; label: string; i: number }) {
   return (

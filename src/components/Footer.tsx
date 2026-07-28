@@ -43,7 +43,7 @@ export function Footer() {
           <nav aria-label="Interior services">
             <p className="spec-plate mb-3 text-white/50">INTERIOR</p>
             <ul className="space-y-2 text-[0.92rem]">
-              {SERVICES.filter((s) => !s.pillar && s.slug !== "deck-building" && s.slug !== "window-door-installation" && s.slug !== "porch-deck-refinishing").map((s) => (
+              {SERVICES.filter((s) => !s.pillar && s.slug !== "deck-building" && s.slug !== "window-door-installation" && s.slug !== "porch-deck-refinishing").slice(0, 8).map((s) => (
                 <li key={s.slug}>
                   <Link href={`/services/${s.slug}`} className="hover:text-white">
                     {s.navName ?? s.name}

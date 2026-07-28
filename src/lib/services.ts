@@ -43,6 +43,12 @@ export const SERVICES: Service[] = [
       "custom-framing",
       "interior-doors-trim",
       "full-room-renovation",
+      "tub-to-shower-conversion",
+      "walk-in-shower-installation",
+      "cabinet-installation",
+      "lvp-flooring-installation",
+      "popcorn-ceiling-removal",
+      "wainscoting-installation",
     ],
     intro: [
       "Most interior remodels go sideways for one reason: too many companies on one job. The framer blames the drywaller, the drywaller blames the tile guy, and you spend your evenings playing referee.",
@@ -785,6 +791,10 @@ export const SERVICES: Service[] = [
     related: ["deck-building", "exterior-remodeling", "window-door-installation"],
   },
 ];
+
+import { SERVICES2 } from "./services2";
+
+SERVICES.push(...SERVICES2);
 
 export function getService(slug: string): Service | undefined {
   return SERVICES.find((s) => s.slug === slug);
