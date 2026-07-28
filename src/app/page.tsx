@@ -5,7 +5,6 @@ import { Pic } from "@/components/Pic";
 import { FaqList } from "@/components/FaqList";
 import { LeadForm } from "@/components/LeadForm";
 import { Reveal } from "@/components/Reveal";
-import { RadiusMap } from "@/components/RadiusMap";
 import { BUSINESS, telHref } from "@/lib/business";
 import { CITIES } from "@/lib/cities";
 
@@ -511,8 +510,17 @@ export default function Home() {
             </div>
           </Reveal>
           <Reveal dir="right" delay={100}>
-            <div className="hidden rounded-2xl bg-night p-6 shadow-xl sm:block">
-              <RadiusMap />
+            <div className="lift overflow-hidden rounded-2xl shadow-xl">
+              <div className="h-[300px] sm:h-[380px]">
+                <Pic
+                  k="brick-porch-black-metal-railings-pa"
+                  sizes="(min-width: 1024px) 50vw, 100vw"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <p className="bg-door px-5 py-3 text-center font-display text-[0.85rem] font-bold uppercase tracking-wide text-white">
+                Real jobs across both counties, photographed by our crew
+              </p>
             </div>
           </Reveal>
         </div>
