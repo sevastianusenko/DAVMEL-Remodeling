@@ -279,16 +279,16 @@ export default function Home() {
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="space-y-5">
             {[
-              { k: "bathroom-demolition-before-pa", label: "DETAILED SCOPE FOR YOUR VISION" },
-              { k: "shower-pan-liner-install-pa", label: "SEAMLESS PROCESS, REAL CRAFT" },
-              { k: "walk-in-shower-glass-slider-marble-pa", label: "YOUR ALL-IN-ONE REMODELING TEAM" },
+              { k: "bathroom-double-vanity-led-mirrors-pa", label: "DETAILED SCOPE FOR YOUR VISION" },
+              { k: "porcelain-floor-tile-leveling-system-pa", label: "SEAMLESS PROCESS, REAL CRAFT" },
+              { k: "open-concept-living-remodel-lancaster-pa", label: "YOUR ALL-IN-ONE REMODELING TEAM" },
             ].map((c, i) => (
               <Reveal key={c.k} dir="left" delay={i * 120}>
                 <div className={`lift relative overflow-hidden rounded-xl shadow-lg ${i === 1 ? "sm:ml-14" : ""}`}>
-                  <div className="h-[150px] sm:h-[170px]">
+                  <div className="h-[170px] sm:h-[190px]">
                     <Pic k={c.k} sizes="(min-width: 1024px) 40vw, 100vw" className="h-full w-full object-cover" />
                   </div>
-                  <div className="absolute inset-0 bg-door/55" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-door/90 via-door/25 to-transparent" />
                   <p className="absolute inset-x-0 bottom-4 px-5 font-display text-[0.95rem] font-bold uppercase tracking-wide text-white">
                     {c.label}
                   </p>
