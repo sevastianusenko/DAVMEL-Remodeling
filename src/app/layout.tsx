@@ -91,6 +91,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${archivo.variable} ${sourceSerif.variable} ${plexMono.variable}`}>
       <body className="pb-[52px] sm:pb-0">
+        <script
+          dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }}
+        />
         <JsonLd data={businessSchema} />
         <a
           href="#main"
