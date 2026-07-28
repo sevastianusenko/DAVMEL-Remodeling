@@ -9,7 +9,7 @@ import { BUSINESS, telHref } from "@/lib/business";
 const NAV = [
   { href: "/services", label: "Services" },
   { href: "/projects", label: "Projects" },
-  { href: "/service-areas", label: "Service Areas" },
+  { href: "/gallery", label: "Gallery" },
   { href: "/about", label: "About" },
   { href: "/blog", label: "Blog" },
   { href: "/contact", label: "Contact" },

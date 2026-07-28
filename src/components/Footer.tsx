@@ -70,6 +70,7 @@ export function Footer() {
             <p className="spec-plate mt-6 mb-3 text-white/50">COMPANY</p>
             <ul className="space-y-2 text-[0.92rem]">
               <li><Link href="/projects" className="hover:text-white">Projects</Link></li>
+              <li><Link href="/gallery" className="hover:text-white">Gallery</Link></li>
               <li><Link href="/reviews" className="hover:text-white">Reviews</Link></li>
               <li><Link href="/about" className="hover:text-white">About</Link></li>
               <li><Link href="/faq" className="hover:text-white">FAQ</Link></li>

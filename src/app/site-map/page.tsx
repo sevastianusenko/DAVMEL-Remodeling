@@ -19,6 +19,7 @@ const MAIN: [string, string][] = [
   ["/services", "Services"],
   ["/service-areas", "Service Areas"],
   ["/projects", "Projects"],
+  ["/gallery", "Gallery"],
   ["/blog", "Blog"],
   ["/about", "About"],
   ["/reviews", "Reviews"],
