@@ -1,26 +1,212 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-plaster: #f5f4f0;
+  --color-paper: #ffffff;
+  --color-ink: #20242a;
+  --color-ink-soft: #4c525b;
+  --color-door: #2c5972;
+  --color-door-deep: #1d3d4f;
+  --color-night: #16232b;
+  --color-tape: #2274ce;
+  --color-tape-deep: #1b5fa8;
+  --color-oak: #a9723d;
+  --color-vial: #c9d64f;
+  --color-line: #ddd9ce;
+  --color-line-soft: #e8e5dc;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-display: var(--font-archivo), "Arial Narrow", sans-serif;
+  --font-body: var(--font-source-serif), Georgia, serif;
+  --font-mono: var(--font-plex-mono), "Courier New", monospace;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-plaster);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+::selection {
+  background: var(--color-tape);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-tape);
+  outline-offset: 2px;
+}
+
+@layer components {
+  /* Signature: story-pole rule. A level line with measurement ticks. */
+  .rule {
+    position: relative;
+    height: 14px;
+    background-image: repeating-linear-gradient(
+        to right,
+        var(--color-line) 0 1px,
+        transparent 1px 12px
+      ),
+      linear-gradient(to bottom, transparent 6px, var(--color-line) 6px 7px, transparent 7px);
+    background-size:
+      100% 7px,
+      100% 100%;
+    background-position:
+      0 bottom,
+      0 0;
+    background-repeat: repeat-x, no-repeat;
+  }
+  .rule-tall {
+    background-image: repeating-linear-gradient(
+        to right,
+        var(--color-line) 0 1px,
+        transparent 1px 12px
+      ),
+      repeating-linear-gradient(to right, var(--color-line) 0 1px, transparent 1px 96px),
+      linear-gradient(to bottom, transparent 6px, var(--color-line) 6px 7px, transparent 7px);
+    background-size:
+      100% 7px,
+      100% 100%,
+      100% 100%;
+    background-position:
+      0 bottom,
+      0 0,
+      0 0;
+    background-repeat: repeat-x, repeat-x, no-repeat;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-door);
+  }
+
+  .spec-plate {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--color-ink-soft);
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    padding: 0.8rem 1.5rem;
+    border-radius: 3px;
+    background: var(--color-tape);
+    color: #fff;
+    transition: background-color 150ms ease;
+  }
+  .btn:hover {
+    background: var(--color-tape-deep);
+  }
+  .btn-dark {
+    background: var(--color-ink);
+  }
+  .btn-dark:hover {
+    background: var(--color-door-deep);
+  }
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-ink);
+    box-shadow: inset 0 0 0 2px var(--color-ink);
+  }
+  .btn-ghost:hover {
+    background: var(--color-ink);
+    color: #fff;
+  }
+  .btn-ghost-light {
+    background: transparent;
+    color: #fff;
+    box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.85);
+  }
+  .btn-ghost-light:hover {
+    background: rgba(255, 255, 255, 0.12);
+  }
+
+  .prose-site p {
+    margin-block: 1rem;
+  }
+  .prose-site h2 {
+    font-size: 1.6rem;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .prose-site h3 {
+    font-size: 1.2rem;
+    margin-top: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+  .prose-site ul {
+    list-style: none;
+    margin-block: 1rem;
+    padding-left: 0;
+  }
+  .prose-site ul li {
+    position: relative;
+    padding-left: 1.4rem;
+    margin-block: 0.45rem;
+  }
+  .prose-site ul li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.62em;
+    width: 0.75rem;
+    height: 2px;
+    background: var(--color-oak);
+  }
+  .prose-site a {
+    color: var(--color-tape-deep);
+    text-decoration: underline;
+    text-decoration-color: color-mix(in srgb, var(--color-tape) 45%, transparent);
+    text-underline-offset: 3px;
+  }
+  .prose-site a:hover {
+    text-decoration-color: var(--color-tape);
+  }
+  .prose-site strong {
+    font-weight: 700;
+  }
+
+  /* Chalk line: draws once under the hero headline. */
+  .chalk {
+    height: 3px;
+    width: 0;
+    background: var(--color-tape);
+    animation: chalk-snap 700ms 250ms cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  }
+  @keyframes chalk-snap {
+    to {
+      width: 100%;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .chalk {
+      animation: none;
+      width: 100%;
+    }
+  }
 }
