@@ -317,6 +317,11 @@ export const CITIES: City[] = [
   },
 ];
 
+import { CITIES2 } from "./cities2";
+import { CITIES3 } from "./cities3";
+
+CITIES.push(...CITIES2, ...CITIES3);
+
 export function getCity(slug: string): City | undefined {
   return CITIES.find((c) => c.slug === slug);
 }

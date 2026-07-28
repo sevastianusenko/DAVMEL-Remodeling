@@ -80,13 +80,18 @@ export function Footer() {
           <nav aria-label="Service areas">
             <p className="spec-plate mb-3 text-white/50">SERVICE AREAS</p>
             <ul className="space-y-2 text-[0.92rem]">
-              {CITIES.map((c) => (
+              {CITIES.slice(0, 10).map((c) => (
                 <li key={c.slug}>
                   <Link href={`/service-areas/${c.slug}`} className="hover:text-white">
                     {c.name}, PA
                   </Link>
                 </li>
               ))}
+              <li>
+                <Link href="/service-areas" className="font-semibold text-white/90 hover:text-white">
+                  All towns we serve →
+                </Link>
+              </li>
             </ul>
           </nav>
 

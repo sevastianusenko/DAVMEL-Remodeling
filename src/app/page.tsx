@@ -490,7 +490,7 @@ export default function Home() {
               with notes on the housing and what it usually needs.
             </p>
             <ul className="mt-6 grid grid-cols-2 gap-x-6 gap-y-2.5">
-              {CITIES.map((c) => (
+              {CITIES.slice(0, 10).map((c) => (
                 <li key={c.slug}>
                   <Link
                     href={`/service-areas/${c.slug}`}

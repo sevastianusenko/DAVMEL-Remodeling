@@ -16,7 +16,10 @@ export const metadata: Metadata = {
 export default function ServiceAreasIndex() {
   const lancaster = CITIES.filter((c) => c.county === "Lancaster County");
   const chester = CITIES.filter((c) => c.county === "Chester County");
-  const other = CITIES.filter((c) => !["Lancaster County", "Chester County"].includes(c.county));
+  const berks = CITIES.filter((c) => c.county === "Berks County");
+  const other = CITIES.filter(
+    (c) => !["Lancaster County", "Chester County", "Berks County"].includes(c.county)
+  );
 
   return (
     <>
@@ -35,7 +38,8 @@ export default function ServiceAreasIndex() {
         {[
           { label: "LANCASTER COUNTY", list: lancaster },
           { label: "CHESTER COUNTY", list: chester },
-          { label: "BERKS + LEBANON", list: other },
+          { label: "BERKS COUNTY", list: berks },
+          { label: "LEBANON · YORK · DAUPHIN", list: other },
         ].map((group) => (
           <div key={group.label} className="mb-12 last:mb-0">
             <SectionRule label={group.label} />
