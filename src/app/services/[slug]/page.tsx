@@ -18,6 +18,58 @@ export function generateStaticParams() {
   return SERVICES.map((s) => ({ slug: s.slug }));
 }
 
+// Scope items link to their dedicated landing pages by exact title.
+const TITLE_LINKS: Record<string, string> = {
+  "Full bathroom and kitchen remodels": "/services/bathroom-remodeling",
+  "Basement finishing": "/services/basement-finishing",
+  "Drywall and plaster work": "/services/drywall-installation-repair",
+  "Tile installation": "/services/tile-installation",
+  "Doors, trim and carpentry": "/services/interior-doors-trim",
+  "Whole room renovations": "/services/full-room-renovation",
+  "Walk in showers": "/services/walk-in-shower-installation",
+  "Tub to shower conversions": "/services/tub-to-shower-conversion",
+  "Tile floors and walls": "/services/tile-installation",
+  "Vanities and fixtures": "/services/vanity-installation",
+  "Lighting and ventilation": "/services/bathroom-ventilation-fans",
+  "Cabinet installation": "/services/cabinet-installation",
+  "Tile backsplashes": "/services/tile-backsplash-installation",
+  "Open concept conversions": "/services/load-bearing-wall-removal",
+  "Windows and doors": "/services/window-door-installation",
+  "Framing and insulation": "/services/custom-framing",
+  "Drywall and ceilings": "/services/drywall-installation-repair",
+  "Flooring": "/services/lvp-flooring-installation",
+  "Bathrooms and wet bars": "/services/basement-bathroom-addition",
+  "Egress and code compliance": "/services/egress-window-installation",
+  "Plaster wall restoration": "/services/plaster-repair-restoration",
+  "Skim coating": "/services/skim-coating",
+  "Ceilings": "/services/popcorn-ceiling-removal",
+  "Shower and tub surrounds": "/services/walk-in-shower-installation",
+  "Backsplashes": "/services/tile-backsplash-installation",
+  "Repairs and regrouting": "/services/tile-repair-regrouting",
+  "Wall openings and headers": "/services/load-bearing-wall-removal",
+  "Basement framing": "/services/basement-finishing",
+  "Shower and tub framing": "/services/walk-in-shower-installation",
+  "Interior door installation": "/services/interior-door-installation",
+  "Wainscoting and panel molding": "/services/wainscoting-installation",
+  "Accent walls": "/services/accent-wall-installation",
+  "Closet doors and hardware": "/services/interior-door-installation",
+  "Wall and ceiling restoration": "/services/drywall-installation-repair",
+  "Doors and trim": "/services/interior-doors-trim",
+  "Feature elements": "/services/accent-wall-installation",
+  "Deck building": "/services/deck-building",
+  "Window replacement": "/services/window-door-installation",
+  "Entry and storm doors": "/services/entry-door-installation",
+  "Porch restoration": "/services/porch-deck-refinishing",
+  "Exterior stairs and railings": "/services/deck-railing-installation",
+  "Concrete step resurfacing": "/services/concrete-step-resurfacing",
+  "Railings": "/services/deck-railing-installation",
+  "Deck rebuilds": "/services/porch-deck-refinishing",
+  "Aluminum capping": "/services/window-capping",
+  "Entry doors": "/services/entry-door-installation",
+  "Storm doors": "/services/storm-door-installation",
+  "Railing replacement": "/services/deck-railing-installation",
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -137,18 +189,41 @@ export default async function ServicePage({
       <section className="mx-auto max-w-6xl px-4 pt-16 sm:px-6">
         <SectionHead eyebrow="WHAT WE DO" title={`${s.name}: the full scope`} />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {s.included.map((item, i) => (
-            <Reveal key={item.t} delay={i * 60} dir="zoom" className="h-full">
-              <div className="lift flex h-full flex-col rounded-xl border border-line bg-paper p-6 shadow-sm">
+          {s.included.map((item, i) => {
+            const href = TITLE_LINKS[item.t];
+            const linked = href && href !== `/services/${s.slug}`;
+            const inner = (
+              <>
                 <svg viewBox="0 0 24 24" className="h-7 w-7 text-tape" fill="none" stroke="currentColor" strokeWidth="2.2" aria-hidden="true">
                   <circle cx="12" cy="12" r="10" />
                   <path d="m7.5 12.5 3 3 6-6.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
                 <h3 className="mt-3 font-display text-[1.02rem] font-bold text-door">{item.t}</h3>
                 <p className="mt-2 flex-1 text-[0.92rem] text-ink-soft">{item.d}</p>
-              </div>
-            </Reveal>
-          ))}
+                {linked && (
+                  <p className="spec-plate mt-3 text-tape">
+                    LEARN MORE <span aria-hidden="true">➤</span>
+                  </p>
+                )}
+              </>
+            );
+            return (
+              <Reveal key={item.t} delay={i * 60} dir="zoom" className="h-full">
+                {linked ? (
+                  <Link
+                    href={href}
+                    className="lift group flex h-full flex-col rounded-xl border border-line bg-paper p-6 shadow-sm transition-colors hover:border-tape"
+                  >
+                    {inner}
+                  </Link>
+                ) : (
+                  <div className="lift flex h-full flex-col rounded-xl border border-line bg-paper p-6 shadow-sm">
+                    {inner}
+                  </div>
+                )}
+              </Reveal>
+            );
+          })}
         </div>
       </section>
 

@@ -49,6 +49,17 @@ export const SERVICES: Service[] = [
       "lvp-flooring-installation",
       "popcorn-ceiling-removal",
       "wainscoting-installation",
+      "vanity-installation",
+      "bathroom-ventilation-fans",
+      "tile-backsplash-installation",
+      "tile-repair-regrouting",
+      "load-bearing-wall-removal",
+      "basement-bathroom-addition",
+      "egress-window-installation",
+      "plaster-repair-restoration",
+      "skim-coating",
+      "interior-door-installation",
+      "accent-wall-installation",
     ],
     intro: [
       "Most interior remodels go sideways for one reason: too many companies on one job. The framer blames the drywaller, the drywaller blames the tile guy, and you spend your evenings playing referee.",
@@ -565,7 +576,16 @@ export const SERVICES: Service[] = [
     metaDescription:
       "Exterior remodeling in Lancaster and Chester County PA. Composite decks, replacement windows, entry doors, porch restoration and railings by a licensed contractor. PA #PA214721.",
     pillar: true,
-    children: ["deck-building", "window-door-installation", "porch-deck-refinishing"],
+    children: [
+      "deck-building",
+      "window-door-installation",
+      "porch-deck-refinishing",
+      "deck-railing-installation",
+      "window-capping",
+      "entry-door-installation",
+      "storm-door-installation",
+      "concrete-step-resurfacing",
+    ],
     intro: [
       "Pennsylvania weather is a demolition crew that works for free. Sun cooks the south side, freeze and thaw pries apart everything with a gap, and one missed flashing detail becomes a rotted sill in three winters. Exterior work here is about doing the boring details right: flashing, slope, sealant, fasteners.",
       "We build composite decks, install replacement windows and entry doors, rebuild porch steps and railings, and bring weathered exteriors back to life. Same crew, same license, same phone number as our interior work.",
@@ -793,8 +813,10 @@ export const SERVICES: Service[] = [
 ];
 
 import { SERVICES2 } from "./services2";
+import { SERVICES3 } from "./services3";
+import { SERVICES4 } from "./services4";
 
-SERVICES.push(...SERVICES2);
+SERVICES.push(...SERVICES2, ...SERVICES3, ...SERVICES4);
 
 export function getService(slug: string): Service | undefined {
   return SERVICES.find((s) => s.slug === slug);
