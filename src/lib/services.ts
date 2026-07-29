@@ -649,6 +649,12 @@ export const SERVICES: Service[] = [
       { t: "Deck rebuilds", d: "Keep the solid frame, replace the tired surface and rails. Big savings when the bones are good." },
       { t: "Ledger and flashing repair", d: "The number one cause of deck failures, fixed properly with flashing and structural screws." },
     ],
+    process: [
+      { t: "Design, drawings and permit", d: "We measure the yard, agree the size and rail system, produce the drawings your township wants and file the permit. Paperwork overlaps material lead times." },
+      { t: "Footings and frame", d: "Footings poured below frost line, ledger flashed and bolted, joists sized and spaced for your decking. The inspector sees it before anything is covered." },
+      { t: "Decking and railings", d: "Boards with hidden fasteners and a picture frame border, then railings built to the 200 pound code load. This is the fast, satisfying week." },
+      { t: "Final inspection and cleanup", d: "Township final, site raked and hauled, hardware torque checked. You get the maintenance one-pager and the warranty in writing." },
+    ],
     price: {
       note: "2026 installed ranges for our area, including footings, framing and railings.",
       rows: [

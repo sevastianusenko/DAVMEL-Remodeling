@@ -56,6 +56,8 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           "@type": "Article",
           headline: p.title,
           description: p.metaDescription,
+          datePublished: "2026-07-28",
+          dateModified: "2026-07-28",
           image: BUSINESS.url + hero.src,
           author: { "@type": "Person", name: BUSINESS.owner },
           publisher: { "@id": BUSINESS.url + "/#business" },

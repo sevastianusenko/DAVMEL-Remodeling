@@ -75,6 +75,12 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         </p>
         <h1 className="mt-3 text-3xl sm:text-4xl">{p.title}</h1>
         <div className="chalk mt-5" aria-hidden="true" />
+        <div className="mt-5 flex flex-wrap items-center gap-3">
+          <a href={`tel:${BUSINESS.phone}`} className="btn !py-2.5 text-[0.88rem]">
+            Talk to a Contractor: {BUSINESS.phoneDisplay}
+          </a>
+          <span className="spec-plate">FREE WRITTEN ESTIMATES · {BUSINESS.licenseDisplay}</span>
+        </div>
 
         <div className="mt-8 overflow-hidden border border-line">
           <Image

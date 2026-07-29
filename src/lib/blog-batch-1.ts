@@ -84,7 +84,7 @@ export const POSTS_B1: Post[] = [
         h2: "What a real conversion looks like",
         ps: [
           "We recently took a hall bath tub down to the studs and built a walk-in shower with marble look tile and a glass slider in Lancaster. The write-up with photos and the actual scope is here: [tub to shower conversion in Lancaster](/projects/tub-to-shower-conversion-lancaster-pa). It is a fair preview of what the middle of our range buys.",
-          "If you want a number for your own bathroom, send photos and rough dimensions through our [contact page](/contact) or call (717) 210-8194. We work across [Lancaster](/service-areas/lancaster-pa), Ephrata, Lititz and the surrounding towns from our shop in Denver PA. The bigger picture of our bath work, including full remodels, lives at [bathroom remodeling](/services/bathroom-remodeling).",
+          "If you want a number for your own bathroom, start with our dedicated [tub to shower conversion service page](/services/tub-to-shower-conversion), which covers the process, the waterproofing system and current local pricing in one place. Then send photos and rough dimensions through our [contact page](/contact) or call (717) 210-8194. We work across [Lancaster](/service-areas/lancaster-pa), Ephrata, Lititz and the surrounding towns from our shop in Denver PA. The bigger picture of our bath work, including full remodels, lives at [bathroom remodeling](/services/bathroom-remodeling).",
         ],
       },
     ],

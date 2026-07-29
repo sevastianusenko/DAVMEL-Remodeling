@@ -130,6 +130,7 @@ export default function Home() {
             <div key={k} className={`relative overflow-hidden ${i > 3 ? "hidden sm:block" : ""}`}>
               <Pic
                 k={k}
+                priority={i < 3}
                 sizes="(min-width: 640px) 33vw, 50vw"
                 className={`kb ${i % 3 === 1 ? "kb-2" : ""} ${i % 3 === 2 ? "kb-3" : ""} h-full w-full object-cover`}
               />

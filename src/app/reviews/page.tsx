@@ -45,7 +45,7 @@ export default function ReviewsPage() {
             },
             {
               t: "Verify everything",
-              d: "License PA214721 checks out at the Attorney General's registry. Insurance certificate comes with the contract. References from past clients on request.",
+              d: "License PA214721 checks out at the Attorney General's registry (hicsearch.attorneygeneral.gov, takes two minutes). Insurance certificate comes with the contract. References from past clients on request.",
             },
           ].map((item) => (
             <div key={item.t} className="border border-line bg-paper p-6">

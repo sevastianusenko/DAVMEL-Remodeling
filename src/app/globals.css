@@ -20,6 +20,11 @@
   --font-mono: var(--font-plex-mono), "Courier New", monospace;
 }
 
+html,
+body {
+  overflow-x: clip;
+}
+
 body {
   background: var(--color-plaster);
   color: var(--color-ink);

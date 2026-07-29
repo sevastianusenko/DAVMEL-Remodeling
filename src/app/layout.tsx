@@ -34,13 +34,11 @@ export const metadata: Metadata = {
   },
   description:
     "DAVMEL Remodeling is a licensed contractor in Denver PA serving Lancaster and Chester County. Bathrooms, basements, drywall, tile, decks, windows and doors. One team, the whole job. PA #PA214721.",
-  alternates: { canonical: "./" },
   openGraph: {
     type: "website",
     siteName: BUSINESS.name,
     locale: "en_US",
   },
-  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
@@ -49,13 +47,14 @@ export const viewport: Viewport = {
 
 const businessSchema = {
   "@context": "https://schema.org",
-  "@type": "HomeAndConstructionBusiness",
+  "@type": "GeneralContractor",
   "@id": BUSINESS.url + "/#business",
   name: BUSINESS.name,
   legalName: BUSINESS.legalName,
   url: BUSINESS.url,
   telephone: BUSINESS.phone,
   email: BUSINESS.email,
+  logo: BUSINESS.url + "/logo.png",
   image: BUSINESS.url + "/images/open-concept-living-remodel-lancaster-pa.jpg",
   founder: { "@type": "Person", name: BUSINESS.owner },
   foundingDate: String(BUSINESS.founded),
@@ -66,9 +65,15 @@ const businessSchema = {
     postalCode: BUSINESS.baseZip,
     addressCountry: "US",
   },
-  geo: { "@type": "GeoCoordinates", latitude: BUSINESS.geo.lat, longitude: BUSINESS.geo.lng },
+  geo: { "@type": "GeoCoordinates", latitude: 40.23342, longitude: -76.13716 },
   areaServed: AREA_SERVED.map((name) => ({ "@type": "City", name })),
   openingHours: BUSINESS.hours,
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    opens: "07:00",
+    closes: "18:00",
+  },
   priceRange: "$$",
   hasCredential: {
     "@type": "EducationalOccupationalCredential",
