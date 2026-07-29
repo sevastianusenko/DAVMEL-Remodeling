@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { SERVICES, getService } from "@/lib/services";
+import { CITIES } from "@/lib/cities";
 import { PROJECTS } from "@/lib/projects";
 import { photo } from "@/lib/photos";
 import { Pic } from "@/components/Pic";
@@ -352,6 +353,42 @@ export default async function ServicePage({
           </Reveal>
         </section>
       )}
+
+      {/* WHERE WE WORK */}
+      <section className="mx-auto max-w-6xl px-4 pt-16 sm:px-6">
+        <SectionHead
+          eyebrow="WHERE WE WORK"
+          title={`${s.name} across Lancaster & Chester County`}
+        />
+        <Reveal>
+          <p className="mx-auto mb-8 max-w-2xl text-center text-ink-soft">
+            Based in Denver, PA and working about 75 miles in every direction. If your
+            town is on this list, we have either worked there or driven past it on the
+            way to a job. Every link below opens local notes on the housing and what it
+            usually needs.
+          </p>
+          <ul className="grid grid-cols-2 gap-x-6 gap-y-2.5 sm:grid-cols-3 lg:grid-cols-5">
+            {CITIES.map((c) => (
+              <li key={c.slug}>
+                <Link
+                  href={`/service-areas/${c.slug}`}
+                  className="group flex items-center gap-2 font-display text-[0.9rem] font-semibold text-ink hover:text-tape-deep"
+                >
+                  <svg viewBox="0 0 16 16" className="h-3.5 w-3.5 shrink-0 text-tape" fill="none" stroke="currentColor" strokeWidth="2.4" aria-hidden="true">
+                    <path d="M3 8.5 6.5 12 13 4.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  {c.name}, PA
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-8 text-center">
+            <Link href="/service-areas" className="btn btn-ghost">
+              All Service Areas
+            </Link>
+          </div>
+        </Reveal>
+      </section>
 
       {/* CONTACT / PHOTO QUOTE */}
       <section id="contact" className="relative mt-16 overflow-hidden">
